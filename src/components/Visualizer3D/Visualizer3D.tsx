@@ -17,16 +17,19 @@ interface Props {
   prodUrl?: string
   playing: boolean
   useBloom: boolean
+  onTimelineChange: (currentTime: number, duration: number) => void
 }
 
 const Visualizer3D: React.FC<Props> = ({
   playing = false,
   useBloom = true,
   url,
+  prodUrl,
+  onTimelineChange,
 }) => {
-  const { gain, context, data, play, stop, update } = suspend(
-    () => createAudio(require(`assets/audio/${url}`)),
-    [url]
+  const { gain, context, data, duration, getCurrentTime, play, stop, update } = suspend(
+    () => createAudio(prodUrl || url),
+    [prodUrl, url]
   )
 
   useEffect(() => {
@@ -44,6 +47,27 @@ const Visualizer3D: React.FC<Props> = ({
       stop()
     }
   }, [playing])
+
+  useEffect(() => {
+    let animationFrame = 0
+    let lastUpdate = 0
+
+    const updateTimeline = (now: number) => {
+      if (now - lastUpdate >= 100) {
+        onTimelineChange(getCurrentTime(), duration)
+        lastUpdate = now
+      }
+      animationFrame = requestAnimationFrame(updateTimeline)
+    }
+
+    onTimelineChange(getCurrentTime(), duration)
+
+    if (playing) {
+      animationFrame = requestAnimationFrame(updateTimeline)
+    }
+
+    return () => cancelAnimationFrame(animationFrame)
+  }, [duration, getCurrentTime, onTimelineChange, playing])
 
   return (
     <Canvas
@@ -76,7 +100,6 @@ const Visualizer3D: React.FC<Props> = ({
           update={update}
           data={data}
         />
-
         <SynthScene playing={playing} update={update} useBloom={useBloom} />
 
         {/* TODO: Add Track Card:

@@ -17,6 +17,7 @@ interface Props {
   onPlay: () => void
   onNextTrack: () => void
   onPreviousTrack: () => void
+  progress: number
 }
 
 const Sidebar: React.FC<Props> = ({
@@ -27,6 +28,7 @@ const Sidebar: React.FC<Props> = ({
   onPlay,
   onNextTrack,
   onPreviousTrack,
+  progress,
 }) => {
   return (
     <S.Sidebar>
@@ -68,6 +70,15 @@ const Sidebar: React.FC<Props> = ({
             <ForwardStep />
           </S.NextSong>
         </S.PlayerControls>
+        <S.ProgressTrack
+          aria-label="Track progress"
+          aria-valuemax={100}
+          aria-valuemin={0}
+          aria-valuenow={progress}
+          role="progressbar"
+        >
+          <S.ProgressActive style={{ width: `${progress}%` }} />
+        </S.ProgressTrack>
       </S.Player>
 
       <S.ScrollWrapper>

@@ -4,8 +4,10 @@ const createAudio = async (url: string) => {
   const buffer = await res.arrayBuffer()
   const context = new (window.AudioContext || window.webkitAudioContext)()
   let clicked = false
+  let offset = 0
+  let startedAt = 0
   const source = context.createBufferSource()
-  source.buffer = await new Promise((res) =>
+  source.buffer = await new Promise<AudioBuffer>((res) =>
     context.decodeAudioData(buffer, res)
   )
   source.loop = true
@@ -26,16 +28,27 @@ const createAudio = async (url: string) => {
     source,
     gain,
     data,
+    duration: source.buffer.duration,
+
+    getCurrentTime: () => {
+      if (!clicked || context.state !== 'running') return offset
+      return (offset + context.currentTime - startedAt) % source.buffer!.duration
+    },
 
     play: () => {
       if (!clicked) {
         source.start(0)
         clicked = true
+        startedAt = context.currentTime
       }
 
       context.resume()
     },
     stop: () => {
+      if (clicked && context.state === 'running') {
+        offset = (offset + context.currentTime - startedAt) % source.buffer!.duration
+        startedAt = context.currentTime
+      }
       context.suspend()
     },
     // This function gets called every frame per audio source

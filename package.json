@@ -4,6 +4,7 @@
   "author": "Žymantas Venclauskas",
   "license": "MIT",
   "private": false,
+  "type": "module",
   "homepage": "http://lazygeekpanda.github.io/audio-visualizer-js",
   "dependencies": {
     "@react-three/drei": "^9.5.3",
@@ -21,7 +22,6 @@
     "glsl-noise": "0.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
     "react-spring": "^9.4.4",
     "styled-components": "^5.3.5",
     "suspend-react": "^0.0.8",
@@ -32,12 +32,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +60,8 @@
   "devDependencies": {
     "@types/styled-components": "^5.1.25",
     "@types/three": "^0.139.0",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "vite": "^5.4.21",
+    "vite-plugin-svgr": "^3.3.0"
   }
 }

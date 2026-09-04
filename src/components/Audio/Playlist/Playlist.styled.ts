@@ -163,7 +163,7 @@ export const TrackArtist = styled(BodyText)`
 
 export const PlayerControls = styled.div`
   position: absolute;
-  bottom: 20px;
+  bottom: 42px;
   width: 100%;
   left: 0;
 
@@ -175,6 +175,29 @@ export const PlayerControls = styled.div`
     bottom: 0;
     transform: translateY(-25%);
   }
+`
+
+export const ProgressTrack = styled.div`
+  position: absolute;
+  right: 40px;
+  bottom: 18px;
+  left: 40px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.28);
+
+  @media (max-width: 992px) {
+    right: 32px;
+    bottom: 12px;
+    left: 32px;
+  }
+`
+
+export const ProgressActive = styled.div`
+  height: 100%;
+  border-radius: inherit;
+  background-color: ${colors.white};
 `
 
 const SmallControllButton = styled(ControlButton)`
@@ -231,7 +254,7 @@ export const ScrollWrapper = styled.div`
 `
 
 export const Playlist = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
 
   > label {
     font-size: 14px;
@@ -248,17 +271,17 @@ export const TrackList = styled.div`
   /* max-height: 300px; */
   overflow-y: auto;
 
-  padding: 10px 0;
+  padding: 6px 0;
 `
 
 export const Track = styled.div`
-  margin: 10px 0;
+  margin: 5px 0;
 
   display: flex;
   align-items: center;
 
-  padding: 5px;
-  border-radius: 12px;
+  padding: 4px 5px;
+  border-radius: 8px;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.05);
@@ -266,13 +289,13 @@ export const Track = styled.div`
 `
 
 export const TrackCover = styled.div`
-  margin-right: 12px;
+  margin-right: 10px;
 
   > div {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     background-color: ${colors.accent};
-    border-radius: 10px;
+    border-radius: 8px;
   }
 `
 
@@ -280,7 +303,7 @@ export const TrackDetails = styled.div`
   flex: 1;
 
   > strong {
-    font-size: 18px;
+    font-size: 16px;
     display: block;
     color: ${colors.white};
   }

@@ -4,6 +4,9 @@ import * as THREE from 'three'
 import { useTexture } from '@react-three/drei'
 import CustomShaderMaterial from 'three-custom-shader-material'
 
+import displacementTexture from 'assets/images/materials/synth/displacement.png'
+import metalnessTexture from 'assets/images/materials/synth/metalness-2.png'
+
 const fragmentShader = `
 float aastep(in float threshold, in float value) {
   float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
@@ -30,10 +33,7 @@ interface Props {
 
 const Terrain: React.FC<Props> = forwardRef<THREE.Mesh, Props>(
   ({ z }, ref) => {
-    const [heightTexture, metalnessTexture] = useTexture([
-      require('assets/images/materials/synth/displacement.png'),
-      require('assets/images/materials/synth/metalness-2.png'),
-    ])
+    const [heightTexture, metalness] = useTexture([displacementTexture, metalnessTexture])
 
     return (
       <mesh
@@ -49,7 +49,7 @@ const Terrain: React.FC<Props> = forwardRef<THREE.Mesh, Props>(
           side={THREE.DoubleSide}
           displacementMap={heightTexture}
           displacementScale={0.1}
-          metalnessMap={metalnessTexture}
+          metalnessMap={metalness}
           metalness={0.95}
           roughness={0.25}
           fragmentShader={fragmentShader}

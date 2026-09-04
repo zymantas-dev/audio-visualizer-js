@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react'
+import React, { Suspense, useState, useEffect, useCallback } from 'react'
 
 import Loader from 'components/Loader/Loader'
 import Layout from 'components/Layout/Layout'
@@ -22,6 +22,11 @@ const App: React.FC = () => {
   }, [trackIndex])
 
   const [playing, setPlaying] = useState(false)
+  const [timeline, setTimeline] = useState({ currentTime: 0, duration: 0 })
+
+  const onTimelineChange = useCallback((currentTime: number, duration: number) => {
+    setTimeline({ currentTime, duration })
+  }, [])
 
   const onPlay = () => {
     if (playing) {
@@ -64,6 +69,7 @@ const App: React.FC = () => {
               prodUrl={currentTrack.prodUrl}
               playing={playing}
               useBloom={useBloom}
+              onTimelineChange={onTimelineChange}
             />
           </Suspense>
         </div>
@@ -76,6 +82,7 @@ const App: React.FC = () => {
           onPlay={onPlay}
           onNextTrack={onNextTrack}
           onPreviousTrack={onPreviousTrack}
+          progress={timeline.duration ? (timeline.currentTime / timeline.duration) * 100 : 0}
         />
       </Layout>
     </>
