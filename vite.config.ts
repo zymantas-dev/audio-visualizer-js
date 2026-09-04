@@ -6,6 +6,7 @@ import svgr from 'vite-plugin-svgr'
 export default defineConfig(({ mode }) => ({
   plugins: [
     svgr({
+      include: '**/*.svg',
       svgrOptions: {
         exportType: 'named',
         namedExport: 'ReactComponent',

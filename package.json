@@ -7,13 +7,13 @@
   "type": "module",
   "homepage": "http://lazygeekpanda.github.io/audio-visualizer-js",
   "dependencies": {
-    "@react-three/drei": "^9.5.3",
+    "@react-three/drei": "9.5.3",
     "@react-three/fiber": "^8.0.12",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
     "@types/jest": "^27.4.1",
-    "@types/node": "^17.0.27",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.0.7",
     "@types/react-dom": "^18.0.0",
     "babel-plugin-glsl": "1.0.0",
@@ -22,7 +22,6 @@
     "glsl-noise": "0.0.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-spring": "^9.4.4",
     "styled-components": "^5.3.5",
     "suspend-react": "^0.0.8",
     "three": "^0.139.2",
@@ -62,6 +61,10 @@
     "@types/three": "^0.139.0",
     "gh-pages": "^3.2.3",
     "vite": "^5.4.21",
-    "vite-plugin-svgr": "^3.3.0"
+    "vite-plugin-svgr": "^4.5.0"
+  },
+  "overrides": {
+    "@react-spring/three": "9.7.5",
+    "react-composer": "5.0.3"
   }
 }
