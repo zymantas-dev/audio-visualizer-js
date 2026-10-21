@@ -1,13 +1,15 @@
-import React, { Suspense, useState, useEffect, useCallback } from 'react'
+import React, { Suspense, lazy, useState, useEffect, useCallback } from 'react'
 
 import Loader from 'components/Loader/Loader'
 import Layout from 'components/Layout/Layout'
-import Visualizer3D from 'components/Visualizer3D'
 import Playlist from 'components/Audio/Playlist'
 
 import TrackModel from 'models/track.model'
 
 import store from 'store'
+
+// three / r3f / postprocessing load as a separate chunk so the shell paints first.
+const Visualizer3D = lazy(() => import('components/Visualizer3D'))
 
 const App: React.FC = () => {
   const { tracks } = store

@@ -9,13 +9,21 @@ Huge thanks for this article which was an inspiration & excellent learning mater
 
 ---
 
-[Demo](https://lazygeekpanda.github.io/audio-visualizer-js/)
+Live: https://audio-visualizer.kodeo.lt/
 
 ![](https://raw.githubusercontent.com/lazygeekpanda/audio-visualizer-js/master/demo/audio-visualizer-demo-min.png)
 
-## TODO
- - Add 3D Audio Card on center
- - Add audio controls
+## Run it
+```bash
+npm install
+npm run dev
+npm run build
+```
+
+Audio is only fetched and decoded for the selected track, and playback starts from a click (browser autoplay rules). The 3D scene is a lazy-loaded chunk, so the player UI paints first.
+
+## Music credits
+The tracks are NoCopyrightSounds (NCS) releases, credited in the player and used under NCS's attribution terms: Hoober - Higher, Abandoned - Out of the Grave, Egzod/Maestro Chives/Neoni - Royalty, Abstrakt - Nobody Else, QR - XXI. Check [ncs.io](https://ncs.io) terms before reusing the audio files elsewhere.
 
 ## References
  - [Building an Audio Visualizer With JavaScript](https://medium.com/swlh/building-a-audio-visualizer-with-javascript-324b8d420e7)
